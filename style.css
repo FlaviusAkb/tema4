@@ -1,31 +1,57 @@
 /*
- Theme Name:   Astra Child
- Theme URI:	http://example.com/astra-child
- Description:  Astra Child Theme is an awesome theme.
- Author:   	Brainstorm Force
- Author URI:   https://www.wpastra.com
+ Theme Name:   Astra Child Theme
+ Author:   	Flavius
  Template: 	astra
  Version:  	1.0.0
- License:  	GNU General Public License v2 or later
- License URI:  http://www.gnu.org/licenses/gpl-2.0.html
- Tags:     	astra
+ Description: This is a child theme of Astra
  Text Domain:  astra-child
 */
 
-body {
-    background: #0E3C52!important;
+ul {
+    margin: 0 1em!important;
 }
 
-header.arival-header #top-header>.container {
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
+#wpr-top-header {
+    background: #0E3C52!important;
+    height: 40px;
+    position: sticky!important;
+    top: 0!important;
+}
+.wpr-container-top-navbar {
+    height: inherit;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
+}
+.wpr-container-top-navbar ul {
+    height: inherit;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.wpr-menu-item
+ {
+    margin-right: 1rem!important;
+    
+}
+.wpr-menu-item a
+ {
+
+}
+
+.wpr-menu-item a:hover,
+.wpr-navbar-left-item a:hover {
+    color: #0E3C52!important;
+    background-color: #fff!important;
+}
+
+.wpr-navbar-left-item a, 
+.wpr-menu-item a {
+    color: #fff!important;
+    font-weight: 600;
+}
+
+h2 {
+    font-weight: 600;
 }
