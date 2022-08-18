@@ -6,7 +6,9 @@
  Description: This is a child theme of Astra
  Text Domain:  astra-child
 */
-
+body {
+    padding-top: 120px;
+}
 ul {
     margin: 0 1em!important;
 }
@@ -14,8 +16,6 @@ ul {
 #wpr-top-header {
     background: #0E3C52!important;
     height: 40px;
-    position: sticky!important;
-    top: 0!important;
 }
 .wpr-container-top-navbar {
     height: inherit;
@@ -50,4 +50,13 @@ ul {
 
 h2 {
     font-weight: 600;
+}
+
+#ast-desktop-header {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }

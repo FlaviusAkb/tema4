@@ -7,9 +7,9 @@ function akb_add_files() {
 add_action('wp_enqueue_scripts', 'akb_add_files');
 
 
-add_action( 'astra_masthead_top','add_contact_navbar' );
+add_action( 'astra_main_header_bar_top','add_contact_navbar' );
 function add_contact_navbar () { ?> 
-<div id="wpr-top-header">
+<div id="wpr-top-header" class="fixed">
 		<div class="wpr-container-top-navbar">
 			<ul class="wpr-navbar-left">
                 <li class="wpr-navbar-left-item">
