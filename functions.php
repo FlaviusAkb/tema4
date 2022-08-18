@@ -1,12 +1,13 @@
 <?php
 
-function akb_add_style() {
+function akb_add_files() {
     wp_enqueue_style('akb-style', get_stylesheet_directory_uri() . '/style.css');
+    wp_enqueue_style('navbar-js', get_theme_file_uri('/navbar.js'), NULL, '1.0', true );
 }
-add_action('wp_enqueue_scripts', 'akb_add_style');
+add_action('wp_enqueue_scripts', 'akb_add_files');
 
 
-add_action( 'astra_html_before','add_contact_navbar' );
+add_action( 'astra_masthead_top','add_contact_navbar' );
 function add_contact_navbar () { ?> 
 <div id="wpr-top-header">
 		<div class="wpr-container-top-navbar">
