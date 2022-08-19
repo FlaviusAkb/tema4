@@ -76,7 +76,7 @@ h2 {
 .software-list {
     list-style-type: none;
 }
-.engineers-container{
+.engineers-container{ 
     display: flex;
     justify-content: space-around;
     align-items: center;
