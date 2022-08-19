@@ -53,10 +53,39 @@ h2 {
 }
 
 #ast-desktop-header {
-
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
+}
+
+.engineers-img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.single-engineers-img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+}
+.software-list {
+    list-style-type: none;
+}
+.engineers-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.engineers-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 3em;
 }

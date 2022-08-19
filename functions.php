@@ -7,7 +7,7 @@ function akb_add_files() {
 add_action('wp_enqueue_scripts', 'akb_add_files');
 
 
-add_action( 'astra_main_header_bar_top','add_contact_navbar' );
+
 function add_contact_navbar () { ?> 
 <div id="wpr-top-header" class="fixed">
 		<div class="wpr-container-top-navbar">
@@ -25,5 +25,83 @@ function add_contact_navbar () { ?>
 		</div> <!-- .container -->
 </div>
 <?php }
+add_action( 'astra_main_header_bar_top','add_contact_navbar' );
 
+
+function register_engineers_cpt() {
+$args = array (
+'label' => __('Engineers', ''),
+'labels' => array(
+    'name' => __('Engineers', ''),
+    'singular_name' => __('Engineer', ''),
+    'featured_image' => __('Engineer Photo', ''),
+    'set_featured_image' => __('Set Engineer Photo', ''),
+    'remove_featured_image' => __('Remove Engineer Photo', ''),
+    'use_featured_image' => __('Use Engineer Photo', ''),
+    'add_new_item' => __('Add a new Engineer', ''),
+    'add_new' => __('Add Engineer', ''),
+    'edit_item' => __('Edit Engineer', ''),
+    'view_items' => __('View Engineers', ''),
+    'view_item' => __('View Engineer', '')
+
+),
+'public' => true,
+'publicly_queryable' => true,
+'show_ui' => true,
+'show_in_rest' => true,
+'has_archive' => true,
+'show_in_menu' => true,
+'exclude_from_search' => false,
+'map_meta_cap' => true,
+'hierarchical' => true,
+'query_var' => true,
+'supports' => array ('title', 'thumbnail', 'editor'),
+'menu_position' => 4,
+'menu_icon' => 'dashicons-plugins-checked',
+
+
+
+);
+
+    register_post_type('engineers', $args);
+}
+add_action('init', 'register_engineers_cpt');
+
+function register_software_cpt() {
+    $args = array (
+    'label' => __('Software', ''),
+    'labels' => array(
+        'name' => __('Software', ''),
+        'singular_name' => __('Software', ''),
+        'add_new_item' => __('Add a new Software', ''),
+        'add_new' => __('Add Software', ''),
+        'edit_item' => __('Edit Software', ''),
+        'view_items' => __('View Software', ''),
+        'view_item' => __('View Software', '')
+    
+    ),
+    'public' => true,
+    'publicly_queryable' => true,
+    'show_ui' => true,
+    'show_in_rest' => true,
+    'has_archive' => false,
+    'show_in_menu' => true,
+    'exclude_from_search' => false,
+    'map_meta_cap' => true,
+    'hierarchical' => true,
+    'query_var' => true,
+    'supports' => array ('title', 'editor'),
+    'menu_position' => 5,
+    'menu_icon' => 'dashicons-album',
+    
+    
+    
+    );
+    
+        register_post_type('software', $args);
+    }
+    add_action('init', 'register_software_cpt');
+
+
+    flush_rewrite_rules( false );
 ?>
