@@ -1,23 +1,29 @@
 <?php
+/**
+ * Php version *
+ *
+ * @category Template_Class
+ * @package Template_Class
+ * @author Author <author@domain.com>
+ * @license https://opensource.org/licenses/MIT MIT License
+ *  @link http://localhost/
+ */
+
 get_header();
-
-$html ='<div class="engineers-container">';
-    while(have_posts()) {
-
-        $html .='<div class="engineers-card">';
-        the_post();
-        
-        $html .='<div class="card-title"><h2><a href="' . get_permalink() . '"</a> ' . get_the_title() . '</h2></div>';
-        $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); 
-        $html .='<div class="card-img"><img src="' . $url .'" class="single-engineers-img"/></div>';
-        $html .='</div>';
-
-
-    
-    
-}
-$html .='</div">';
-echo $html;
+?>
+<div class="akb-container-fluid">
+	<?php
+	while ( have_posts() ) {
+		?>
+	<div class="engineers-card-simple">
+		<?php the_post(); ?>
+		<div class="engineers-card-simple-title"><h2><a href="<?php the_permalink(); ?>"> <?php the_title(); ?></a></h2></div>
+		<?php $url = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ), 'full' ); ?> 
+		<div class="engineers-card-simple-img"><img src=" <?php echo esc_url( $url ); ?>" class="single-engineers-img"/></div>
+		</div>
+<?php } ?>
+</div>
+<?php
 
 
 get_footer();
