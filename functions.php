@@ -61,6 +61,7 @@ function register_engineers_cpt() {
 		'show_tagcloud' => false,
 		'hierarchical'  => true,
 		'show_in_rest'  => true,
+		'has_archive'   => true,
 	);
 	register_taxonomy( 'industries', array( 'industries' ), $engargs );
 
@@ -122,6 +123,7 @@ function register_software_cpt() {
 		'show_tagcloud' => false,
 		'hierarchical'  => true,
 		'show_in_rest'  => true,
+		'has_archive'   => true,
 	);
 	register_taxonomy( 'regions', array( 'regions' ), $taxargs );
 

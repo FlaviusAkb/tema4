@@ -71,7 +71,7 @@ while ( have_posts() ) {
 							$interval->y;
 							?>
 							<p class="sec-engineer-age"> <?php echo esc_html( $interval->format( '%Y years' ) ); ?></p>
-						</div>
+							</div>
 						</div>
 					</div>
 					<div class="sec-footer-right-container">

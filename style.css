@@ -220,3 +220,20 @@ font-weight: 600;
 .dashicons-superhero {
     vertical-align: middle;
 }
+.engineers-card-simple {
+    padding: 2em;
+    margin: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.engineers-card-simple-title {
+    text-align: center;
+}
+.single-software-list {
+    list-style-type: none;
+}
+.ssl-engineers-list{
+    list-style-type: none;
+}

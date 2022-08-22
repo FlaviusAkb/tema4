@@ -38,19 +38,19 @@ while ( have_posts() ) {
 
 	?>
 
-	<ul>
-	<li>License: <?php echo esc_attr( $license ); ?></li>
-	<li>Price: <?php echo esc_attr( $price ); ?></li>
+	<ul class="single-software-list">
+	<li class="single-software-list-item">License: <?php echo esc_attr( $license ); ?></li>
+	<li class="single-software-list-item">Price: <?php echo esc_attr( $price ); ?></li>
 
 	<?php
 	if ( $engineers->have_posts() ) {
 		?>
-		<ul>
+		<ul class="ssl-engineers-list">
 		<?php
 		while ( $engineers->have_posts() ) {
 			$engineers->the_post();
 			?>
-				<li><?php the_title(); ?></li>
+				<li class="ssl-engineers-list-item"><?php the_title(); ?></li>
 			<?php
 		}
 		?>
