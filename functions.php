@@ -37,7 +37,8 @@ function add_contact_navbar() {
 			</ul>
 		</div> <!-- .container -->
 </div>
-<?php }
+	<?php
+}
 add_action( 'astra_main_header_bar_top', 'add_contact_navbar' );
 
 /**
@@ -158,6 +159,218 @@ function register_software_cpt() {
 }
 	add_action( 'init', 'register_software_cpt' );
 
+/**
+ * Adds a custom post
+ *
+ * @param args $args this is a comment.
+ */
+function tema_7_section_a_callback( $args ) {
+	?>
+	<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Edit Section A settings.', 'wpr' ); ?></p>
+	<?php
+}
 
+/**
+ * Adds a custom post
+ *
+ * @param args $args this is a comment.
+ */
+function tema_7_section_b_callback( $args ) {
+	?>
+	<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Edit Section B settings.', 'wpr' ); ?></p>
+	<?php
+}
+
+/**
+ * Adds
+ *
+ * @param args $args is ffsdfs.
+ */
+function token_field_callback( $args ) {
+	// Get the value of the setting we've registered with register_setting().
+	$options = get_option( 'wpr_options' );
+	?>
+<input
+		value="<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>"
+		id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		data-custom="<?php echo esc_attr( $args['wpr_custom_data'] ); ?>"
+		name="wpr_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+		type="text">
+	<?php
+}
+/**
+ * Adds
+ *
+ * @param args $args is ffsdfs.
+ */
+function client_id_callback( $args ) {
+	// Get the value of the setting we've registered with register_setting().
+	$options = get_option( 'wpr_options' );
+	?>
+<input
+		value="<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>"
+		id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		data-custom="<?php echo esc_attr( $args['wpr_custom_data'] ); ?>"
+		name="wpr_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+		type="text">
+	<?php
+}
+/**
+ * Adds
+ *
+ * @param args $args is ffsdfs.
+ */
+function software_discount_callback( $args ) {
+	// Get the value of the setting we've registered with register_setting().
+	$options = get_option( 'wpr_options' );
+	?>
+<input
+		value="<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>"
+		id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		data-custom="<?php echo esc_attr( $args['wpr_custom_data'] ); ?>"
+		name="wpr_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+		type="number">
+	<?php
+}
+/**
+ * Adds
+ *
+ * @param args $args is ffsdfs.
+ */
+function software_discount_period_callback( $args ) {
+	// Get the value of the setting we've registered with register_setting().
+	$options = get_option( 'wpr_options' );
+	?>
+<input
+		value="<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>"
+		id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		data-custom="<?php echo esc_attr( $args['wpr_custom_data'] ); ?>"
+		name="wpr_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+		type="number">
+	<?php
+}
+
+	add_action(
+		'admin_init',
+		function() {
+			register_setting(
+				'wpr_academy',
+				'wpr_options'
+			);
+			add_settings_section(
+				'tema_7_section_a_fields',
+				'Section A',
+				'tema_7_section_a_callback',
+				'wpr_academy'
+			);
+			add_settings_section(
+				'tema_7_section_b_fields',
+				'Section B',
+				'tema_7_section_b_callback',
+				'wpr_academy'
+			);
+			add_settings_field(
+				'wpr_token_tema',
+				'Token',
+				'token_field_callback',
+				'wpr_academy',
+				'tema_7_section_a_fields',
+				array(
+					'label_for'       => 'wpr_token_tema',
+					'class'           => 'wpr_row',
+					'wpr_custom_data' => 'custom',
+				)
+			);
+			add_settings_field(
+				'wpr_client_id_tema',
+				'Client ID',
+				'client_id_callback',
+				'wpr_academy',
+				'tema_7_section_a_fields',
+				array(
+					'label_for'       => 'wpr_client_id_tema',
+					'class'           => 'wpr_row',
+					'wpr_custom_data' => 'custom',
+				)
+			);
+			add_settings_field(
+				'wpr_software_discount_tema',
+				'Software Discount (%)',
+				'software_discount_callback',
+				'wpr_academy',
+				'tema_7_section_b_fields',
+				array(
+					'label_for'       => 'wpr_software_discount_tema',
+					'class'           => 'wpr_row',
+					'wpr_custom_data' => 'custom',
+				)
+			);
+			add_settings_field(
+				'wpr_discount_period_tema',
+				'Software Period (no of days)',
+				'software_discount_period_callback',
+				'wpr_academy',
+				'tema_7_section_b_fields',
+				array(
+					'label_for'       => 'wpr_discount_period_tema',
+					'class'           => 'wpr_row',
+					'wpr_custom_data' => 'custom',
+				)
+			);
+
+		}
+	);
+
+	add_action(
+		'admin_menu',
+		function() {
+			add_menu_page(
+				'Tema 7 settings',
+				'Tema 7 options',
+				'manage_options',
+				'tema_7_settings',
+				'tema_7_page_html',
+				'dashicons-admin-settings',
+				1
+			);
+		}
+	);
+
+	/**
+	 * The function to be called to output the content for this page (used in add_menu_page above)
+	 */
+	function tema_7_page_html() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		// check if the user have submitted the settings
+		// WordPress will add the "settings-updated" $_GET parameter to the url.
+		if ( isset( $_GET['settings-updated'] ) ) {
+			// add settings saved message with the class of "updated".
+			add_settings_error( 'wpr_messages', 'wpr_message', __( 'Settings Saved', 'wpr' ), 'updated' );
+		}
+
+		// show error/update messages.
+		settings_errors( 'wpr_messages' );
+		?>
+		<div class="wrap">
+			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			<form action="options.php" method="post">
+				<?php
+				// output security fields for the registered setting "wpr".
+				settings_fields( 'wpr_academy' );
+				// output setting sections and their fields
+				// (sections are registered for "wpr", each field is registered to a specific section).
+				do_settings_sections( 'wpr_academy' );
+				// output save settings button.
+				submit_button( 'Save Settings' );
+				?>
+			</form>
+		</div>
+
+
+		<?php
+
+	}
 	flush_rewrite_rules( false );
-?>
+	?>
