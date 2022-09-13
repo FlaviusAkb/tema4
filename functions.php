@@ -14,6 +14,7 @@
  */
 function akb_add_files() {
 	wp_enqueue_style( 'akb-style', get_stylesheet_directory_uri() . '/style.css', '1.0', true );
+	// wp_enqueue_script( 'test', get_stylesheet_directory_uri() . '/test.js', array( 'jquery' ), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'akb_add_files' );
 
@@ -373,4 +374,111 @@ function software_discount_period_callback( $args ) {
 
 	}
 	flush_rewrite_rules( false );
+
+
+	// function add_text_after_addtocart() {
+	// 	$product       = wc_get_product( get_the_ID() );
+	// 	$product_price = intval( $product->get_price() );
+	// 	if ( 50 < $product_price ) {
+	// 		echo '<p>Bigger than 50</p>';
+	// 	}
+	// }
+	// add_action( 'woocommerce_after_add_to_cart_form', 'add_text_after_addtocart' );
+
+	// add_action( 'woocommerce_after_shop_loop_item_title', 'add_text_after_addtocart', 11 );
+
+	// remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title' );
+	// add_action(
+	// 	'woocommerce_single_product_summary',
+	// 	function() {
+	// 		echo 'test title';
+	// 	},
+	// 	5
+	// );
+
+	add_action(
+		'wpr_single_product_title',
+		function () {
+			echo 'test';
+		}
+	);
+
+	add_action( 'woocommerce_before_shop_loop', 'woocommerce_pagination' );
+
+	add_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count' );
+
+	add_action( 'woocommerce_after_shop_loop', 'woocommerce_catalog_ordering' );
+
+
+	//TEST
+	add_action( 'woocommerce_after_main_content', 'dialog_quickview' );
+	function dialog_quickview() {
+		wp_enqueue_script( 'script-name', get_stylesheet_directory_uri() . '/test.js', array( 'jquery' ), '1.0.0', true );
+		wp_enqueue_script( 'wc-add-to-cart-variation' );
+		wp_localize_script(
+			'script-name',
+			'MyAjax',
+			array(
+				// URL to wp-admin/admin-ajax.php to process the request
+				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+				// generate a nonce with a unique ID "myajax-post-comment-nonce"
+				// so that you can check it later when an AJAX request is sent
+				'security' => wp_create_nonce( 'my-special-string' ),
+			)
+		);
+
+		?>
+		<dialog id="quickViewModal">
+		<div id="quick-modal-body">
+		</div>
+		</dialog>
+		<?php
+	}
+	// The function that handles the AJAX request
+	add_action( 'wp_ajax_my_action', 'my_action_callback' );
+	add_action( 'wp_ajax_nopriv_my_action', 'my_action_callback' );
+	function my_action_callback() {
+		global $product;
+		check_ajax_referer( 'my-special-string', 'security' );
+		$id            = $_GET['id'];
+		$product       = wc_get_product( $id );
+		$category      = wc_get_product_category_list( $id );
+		$added_section = '';
+
+		if ( $product->is_type( 'variable' ) ) {
+			ob_start();
+			woocommerce_variable_add_to_cart();
+			$added_section = ob_get_clean();
+		} else {
+			ob_start();
+			echo apply_filters(
+				'woocommerce_loop_add_to_cart_link',
+				sprintf(
+					'<a href="%s" rel="nofollow" data-product_id="%s" data-product_sku="%s" class="button %s product_type_%s">%s</a>',
+					esc_url( $product->add_to_cart_url() ),
+					esc_attr( $product->get_id() ),
+					esc_attr( $product->get_sku() ),
+					$product->is_purchasable() ? 'add_to_cart_button' : '',
+					esc_attr( $product->get_type() ),
+					esc_html( $product->add_to_cart_text() )
+				),
+				$product
+			);
+			$added_section = ob_get_clean();
+		}
+
+		$selected[] = array(
+			'title'             => $product->get_title(),
+			'link'              => $product->get_permalink(),
+			'image'             => $product->get_image(),
+			'short_description' => $product->get_short_description(),
+			'price'             => $product->get_price_html(),
+			'category'          => $category,
+			'added_section'     => $added_section,
+		);
+
+		echo wp_json_encode( $selected );
+		wp_die();
+	}
+
 	?>
